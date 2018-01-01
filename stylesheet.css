@@ -1,0 +1,21 @@
+body {
+   background: #E8E7E7;
+ }
+img {
+  float: left;
+}
+
+.message {
+  font-size: 18px;
+  color: #cc9999;
+}
+
+.time {
+  font-size: 10px;
+}
+
+header {
+  background: #D4D4D4;
+  color: #900C3F;
+  font-size: 22px;
+}

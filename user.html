@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <link REL="STYLESHEET" HREF="stylesheet.css">
+    <script>
+      // $(document).ready(function(){
+      // });
+    </script>
+  </head>
+  <body>
+    <script>
+
+      $(document).ready(function(){
+        var $body = $('body');
+        var url = document.location.href,
+            params = url.split('?')[1].split('&'),
+            data = {}, tmp;
+        for (var i = 0, l = params.length; i < l; i++) {
+             tmp = params[i].split('=');
+             data[tmp[0]] = tmp[1];
+        }
+        var $currentUser = $('<header></header><br>');
+        //var currUser = data.u;
+        $currentUser.text('Twittler page for ' + data.u);
+        $currentUser.appendTo($body);
+        //$body.html('user page for ' + currentUser);
+
+        var index = streams.users[data.u].length - 1;
+        while(index >= 0) {
+          var tweet = streams.users[data.u][index];
+          var $handle = $('<a></a>');
+          var $tweet = $('<div></div>');
+          var $message = $('<div></div>');
+          var $time = $('<div></div>');
+
+          $tweet.attr('class', 'tweet');
+          $handle.attr('href', 'user.html?u=' + tweet.user);
+          $handle.attr('class', 'handle');
+          $message.attr('class', 'message');
+          $time.attr('class', 'time');
+          $message.text(tweet.message);
+          $message.appendTo($body);
+          $time.text(tweet.created_at);
+          $time.appendTo($body);
+
+          index -= 1;
+
+//          $tweet.css({'font-size': '22px', 'color': '#cc9999'});
+          // $time.css({'font-size': '12px', 'color': 'black'});
+
+        }
+
+
+        var $userTweets = $('<p></p>');
+
+        // $currentUser.css({'font-size': '22px', 'color': 'grey'});
+
+
+      });
+
+    </script>
+
+  </body>
+</html>

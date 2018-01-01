@@ -3,25 +3,93 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link REL="STYLESHEET" HREF="stylesheet.css">
+    <script>
+      // $(document).ready(function(){
+      // });
+    </script>
+
   </head>
   <body>
-    <script>
+    <!-- <header class="main-header" role="banner">
+      <img src="mybannerimage.gif" alt="Banner Image"/>
+    </header> -->
+    <header>
+      <img src="Cute_realistic_bird.jpg" alt="Twitter bird icon" height="40" width="40"/>
+      <h1 id="twittler">Twittler</h1>
+    </header>
+    <br>
+    <button type="button" onclick="refreshTweets()">See new Tweets</button>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+    <div id="tweets"></div>
+
+    <script>
+      $(document).ready(function() {
+
+
+        var $tweets = $('#tweets');
+        // $tweets.html('');
 
         var index = streams.home.length - 1;
-        while(index >= 0){
+        var x = streams.home.length - 1;
+
+        while(index >= 0) {
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          $tweet.attr('class', 'tweet');
+          var $handle = $('<a></a>');
+          $handle.attr('class', 'handle');
+          var $message = $('<div></div>');
+          $message.attr('class', 'message');
+          var $time = $('<div></div>');
+          $time.attr('class', 'time');
+
+          $handle.attr('href', 'user.html?u=' + tweet.user);
+          $handle.text('@' + tweet.user);
+          $handle.prependTo($tweet);
+          $message.text(tweet.message);
+          $message.prependTo($tweet);
+          $time.text(tweet.created_at);
+          $time.prependTo($tweet);
+          $tweet.prependTo($tweets);
           index -= 1;
         }
 
+        refreshTweets();
       });
 
+
+      function refreshTweets() {
+        var $tweets = $('#tweets');
+        $tweets.html('');
+
+//        var index = streams.home.length - 1;
+        for(var index = 0; index < streams.home.length; index++) {
+          var tweet = streams.home[index];
+          var $tweet = $('<div></div>');
+          $tweet.attr('class', 'tweet');
+          var $handle = $('<a></a>');
+          $handle.attr('class', 'handle');
+          var $message = $('<div></div>');
+          $message.attr('class', 'message');
+          var $time = $('<div></div>');
+          $time.attr('class', 'time');
+
+          $handle.attr('href', 'user.html?u=' + tweet.user);
+          $handle.text('@' + tweet.user);
+          $handle.prependTo($tweet);
+          $message.text(tweet.message);
+          $message.prependTo($tweet);
+          $time.text(tweet.created_at);
+          $time.prependTo($tweet);
+          $tweet.prependTo($tweets);
+    //      index -= 1;
+
+          // $message.css({'font-size': '22px', 'color': '#cc9999'});
+          // $time.css({'font-size': '12px', 'color': 'black'});
+          // $("#twittler").css({'font-size': '22px', 'color': '#900C3F'});
+        }
+      };
     </script>
   </body>
 </html>
